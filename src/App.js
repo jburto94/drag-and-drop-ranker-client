@@ -1,77 +1,65 @@
-import { ReactComponent as MovementIcon } from './components/misc/movement.svg';
+import React, { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 import { ReactComponent as Trash } from './components/misc/trash.svg';
-import { useState, useRef } from 'react';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.scss';
 
-const defaultList = ['Jake', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott', 'Maya', 'Julie', 'Scott'];
+const listData = ["Lord of the Rings","Tropic Thunder","Step Brothers","The Matrix","Pulp Fiction"];
+const defaultList = listData.map((item, idx) => ( { item: item, id: String(idx)} ))
 
 const App = () => {
   const [list, setList] = useState(defaultList);
-  let dragItem = useRef();
-  let dragOverItem = useRef();
 
-  const dragStart = (e, rank) => {
-    dragItem.current = rank;
-    e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/html", e.target.parentNode);
-    e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
-  }
-
-  const dragOver = (e, rank) => {
-    dragOverItem.current = rank;
-
-    if (dragItem.current === dragOverItem.current) {
+  const onDragEnd = item => {
+    if (!item.destination || item.destination.index === item.source.index) {
       return;
     }
 
-    const arrangedList = [...list];
-    const draggedItem = arrangedList[dragItem.current];
-    arrangedList.splice(dragItem.current, 1)
-    arrangedList.splice(dragOverItem.current, 0, draggedItem);
-    setList(arrangedList);
+    const updatedList = [...list];
+    const [updatedItem] = updatedList.splice(item.source.index, 1);
+    updatedList.splice(item.destination.index, 0, updatedItem);
+
+    setList(updatedList);
   }
 
-  const dropItem = e => {
-    dragItem.current = null;
-    dragOverItem.current = null;
-  }
-
-  const removeItem = (rank) => {
-    const updatedList = list.filter((item, idx) => idx !== rank)
-    setList(updatedList)
+  const removeItem = item => {
+    const updatedList = [...list].filter(listItem => listItem.id !== item.id);
+    setList(updatedList);
   }
 
   return (
     <div className="App">
-      <h2>List</h2>
-      <ul className='bg-light py-5'>
-        {list.map((item, idx)=> (
-          <li key={idx}>
-            <div>
-              <span className='rank'>{idx + 1}</span>
-              <div 
-                className='drag' 
-                draggable 
-                onDragStart={e => dragStart(e, idx) }
-                onDragEnter={e => dragOver(e, idx)}
-                onDragEnd={e => dropItem(e)}
-              >
-                <MovementIcon />
-              </div>
-              <span>{item}</span>
-              </div>
-            <div 
-              className='trash'
-              onClick={() => removeItem(idx)}
-            >
-              <Trash />
-            </div>
-          </li>
-        ))}
-      </ul>
+      <DragDropContext
+        onDragEnd={onDragEnd}
+      >
+        <Droppable droppableId='list'>
+          {provided => (
+            <ul {...provided.droppableProps} ref={provided.innerRef}>
+              {list.map((item, index) => (
+                <Draggable 
+                  key={item.id} 
+                  draggableId={item.id} 
+                  index={index}
+                >
+                  {provided => (
+                    <li 
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <span>{index + 1}. {item.item}</span>
+                      <Trash onClick={() => removeItem(item)} className='trash' />
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }

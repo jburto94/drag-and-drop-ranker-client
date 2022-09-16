@@ -1,4 +1,5 @@
 .App {
+  padding: 25px;
   ul {
     list-style-type: none;
     display: flex;
@@ -12,19 +13,12 @@
       align-items: center;
       border: 1px solid black;
 
-      div {
+      span {
         display: flex;
         align-items: center;
 
         .rank {
           margin-right: 15px;
-        }
-        
-        .drag {
-          margin-right: 15px;
-          cursor: move;
-          display: flex;
-          align-items: center;
         }
         
         svg {
