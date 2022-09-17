@@ -1,0 +1,36 @@
+import { useContext, useState } from 'react';
+import { ListContext } from '../../context/ListContext';
+
+import './UploadListForm.scss';
+
+const UploadListForm = () => {
+  const { createList } = useContext(ListContext)
+  const [textInput, setTextInput] = useState('');
+
+  const handleChange = e => {
+    setTextInput(e.target.value);
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    createList(e.target.list_data.value);
+    setTextInput('');
+  }
+
+  return (
+    <div className='UploadListForm'>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          name='list_data'
+          value={textInput}
+          onChange={handleChange}
+          className='form-control mb-3'
+          rows={12}
+        />
+        <button type='submit' className='btn btn-primary'>Submit New List</button>
+      </form>
+    </div>
+  )
+};
+
+export default UploadListForm;

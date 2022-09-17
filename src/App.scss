@@ -1,34 +1,3 @@
 .App {
   padding: 25px;
-  ul {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-
-    li {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      padding: 1rem;
-      align-items: center;
-      border: 1px solid black;
-
-      span {
-        display: flex;
-        align-items: center;
-
-        .rank {
-          margin-right: 15px;
-        }
-        
-        svg {
-          height: 15px;
-        }
-      }
-
-      .trash {
-        cursor: pointer;
-      }
-    }
-  }
 }

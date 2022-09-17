@@ -40,7 +40,11 @@ export const ListProvider = ({ children }) => {
   const [list, setList] = useState([]);
 
   const onDragEnd = item => {
-    setList(handleDragEnd(list, item));
+    // Checks if user draged item to valid spot, does not update if invalid
+    const reorderedList = handleDragEnd(list, item)
+    if (reorderedList) {
+      setList(reorderedList);
+    }
   }
 
   const removeItem = item => {
