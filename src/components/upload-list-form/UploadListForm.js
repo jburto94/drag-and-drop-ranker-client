@@ -4,7 +4,7 @@ import { ListContext } from '../../context/ListContext';
 import './UploadListForm.scss';
 
 const UploadListForm = () => {
-  const { createList } = useContext(ListContext)
+  const { createList, list } = useContext(ListContext)
   const [textInput, setTextInput] = useState('');
 
   const handleChange = e => {
@@ -19,16 +19,22 @@ const UploadListForm = () => {
 
   return (
     <div className='UploadListForm'>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          name='list_data'
-          value={textInput}
-          onChange={handleChange}
-          className='form-control mb-3'
-          rows={12}
-        />
-        <button type='submit' className='btn btn-primary'>Submit New List</button>
-      </form>
+      {!list.length &&
+        <div>
+        <h2 className='text-center mb-2'>Create Your List</h2>
+        <p className='text-center mb-4'>Separate each item with a new line</p>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            name='list_data'
+            value={textInput}
+            onChange={handleChange}
+            className='form-control mb-3'
+            rows={12}
+          />
+          <button type='submit' className='btn btn-primary'>Submit New List</button>
+        </form>
+      </div>
+      }
     </div>
   )
 };

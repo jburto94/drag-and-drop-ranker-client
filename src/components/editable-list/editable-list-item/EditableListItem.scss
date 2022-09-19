@@ -11,17 +11,15 @@
     padding: 4px;
     width: 32px;
     height: 32px;
-    vertical-align: middle;
     text-align: center;
-    display: inline-block;
+    
     background: #f3cd5a;
     border-radius: 4px;
   }
 
-  span {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  .item-text {
+    word-wrap: break-word;
+    margin-right: 10px;
   }
 
   .trash-container {

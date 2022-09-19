@@ -14,7 +14,7 @@ const EditableListItem = ({provided, item, index}) => {
       className='EditableListItem'
     >
       <span className='rank'>{index + 1}.</span>
-      <span>{item.item}</span>
+      <span className='item-text'>{item.item}</span>
       <div onClick={() => removeItem(item)} className='trash-container justify-self'>
         <Trash className='trash' />
       </div>
