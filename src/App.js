@@ -10,6 +10,8 @@ import Navbar from './components/partials/navbar/Navbar';
 import Home from './components/routes/Home';
 import Login from './components/routes/Login';
 import Register from './components/routes/Register';
+import ForgotPassword from './components/routes/ForgotPassword';
+import ResetPassword from './components/routes/ResetPassword';
 
 const App = () => {
 
@@ -20,6 +22,8 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
       </Routes>
       {/* <Navbar />
       <div className='page-container container py-5'>
