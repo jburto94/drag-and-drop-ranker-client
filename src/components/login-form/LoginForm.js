@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../services/login';
 
 const defaultFormFields = {
   email: '',
@@ -9,6 +11,8 @@ const LoginForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [checked, setChecked] = useState(false);
   const { email, password } = formFields;
+  const navigate = useNavigate();
+
 
   // set dynamic handleChange for each input type
   const handleChange = e => {
@@ -20,9 +24,26 @@ const LoginForm = () => {
     setChecked(!checked);
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    
+    try {
+      const response = await login({
+        email,
+        password,
+        remember: String(checked)
+      });
+
+      console.log(response.data.message)
+
+      navigate('/');
+    } catch (err) {
+      window.alert(err.response.data.message);;
+    }
+  }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="form-outline mb-4">
         <label className="form-label" htmlFor="login-email">Email</label>
         <input 
