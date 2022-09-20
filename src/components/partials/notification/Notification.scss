@@ -1,0 +1,17 @@
+.Notification {
+  div {
+    border: 3px solid;
+    border-radius: 10px;
+    font-size: 1.1em;
+
+    &.success {
+      background-color: #C6E3D7;
+      border-color: green;
+    }
+  
+    &.error {
+      background-color: #f5cdd2;
+      border-color: red;
+    }
+  }
+}

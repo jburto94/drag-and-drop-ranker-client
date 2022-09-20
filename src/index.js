@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ListProvider } from './context/ListContext';
+import { NotificationProvider } from './context/NotificationContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <ListProvider>
-      <App />
-    </ListProvider>
+    <NotificationProvider>
+      <ListProvider>
+        <App />
+      </ListProvider>
+    </NotificationProvider>
   </BrowserRouter>
 );

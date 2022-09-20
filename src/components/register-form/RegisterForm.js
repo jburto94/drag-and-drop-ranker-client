@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { NotificationContext } from '../../context/NotificationContext';
 import { register } from '../../services/register';
 
 const defaultFormFields = {
@@ -12,6 +13,7 @@ const defaultFormFields = {
 const RegisterForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, passwordConfirmation } = formFields;
+  const { notification, setNotification, success, setSuccess } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   // set dynamic handleChange for each input type
@@ -25,9 +27,12 @@ const RegisterForm = () => {
     try {
       const response  = await register({ username, email, password, passwordConfirmation });
       
+      setSuccess(true);
+      setNotification(response.data.message)
       navigate('/');
     } catch (err) {
-      console.log(err)
+      setSuccess(false);
+      setNotification(err.response.data.message);
     }
   }
 
