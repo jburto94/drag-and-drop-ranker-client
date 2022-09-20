@@ -13,7 +13,7 @@ const defaultFormFields = {
 const RegisterForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, passwordConfirmation } = formFields;
-  const { notification, setNotification, success, setSuccess } = useContext(NotificationContext);
+  const { setNotification, setSuccess } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   // set dynamic handleChange for each input type
@@ -28,7 +28,7 @@ const RegisterForm = () => {
       const response  = await register({ username, email, password, passwordConfirmation });
       
       setSuccess(true);
-      setNotification(response.data.message)
+      setNotification(response.data.message);
       navigate('/');
     } catch (err) {
       setSuccess(false);

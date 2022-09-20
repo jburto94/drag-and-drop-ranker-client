@@ -33,7 +33,7 @@ const App = () => {
         clearTimeout(notificationTimer);
       }
     }
-  }, [notification])
+  }, [setNotification, notification])
 
   return (
     <div className="App">

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { NotificationContext } from '../../context/NotificationContext';
 import { login } from '../../services/login';
 
 const defaultFormFields = {
@@ -12,6 +13,7 @@ const LoginForm = () => {
   const [checked, setChecked] = useState(false);
   const { email, password } = formFields;
   const navigate = useNavigate();
+  const { setNotification, setSuccess } = useContext(NotificationContext);
 
 
   // set dynamic handleChange for each input type
@@ -34,11 +36,12 @@ const LoginForm = () => {
         remember: String(checked)
       });
 
-      console.log(response.data.message)
-
+      setSuccess(true);
+      setNotification(response.data.message)
       navigate('/');
     } catch (err) {
-      window.alert(err.response.data.message);;
+      setSuccess(false);
+      setNotification(err.response.data.message);
     }
   }
 

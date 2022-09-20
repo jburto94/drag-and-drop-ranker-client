@@ -1,26 +1,32 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
+import { NotificationContext } from '../../context/NotificationContext';
+import { emailVerification } from '../../services/verifyEmail';
 
 const VerifyEmail = () => {
   const [verified, setVerified] = useState(false);
-  const [error, setError] = useState();
+  const { setNotification, setSuccess } = useContext(NotificationContext);
+  const navigate = useNavigate();
 
   const paramString = useLocation().search;
-  const token = paramString.split('=')[1];
+  const token = paramString.split('?')[1];
 
-  if (!token) {
-    return <p className='text-danger px-4 py-3'>Token not present</p>
-  }
+  useEffect(() => {
+      emailVerification(token)
+        .then(response => {
+          setVerified(true);
+          setNotification(response.data.message);
+          setSuccess(true);
+          navigate('/login')
+        })
+        .catch(err => {
+          setNotification(err.response.data.message);
+          setSuccess(false);
+        })
+  }, []);
+
   return (
     <div>
-      <h2 className='text-center py-5'>
-        {verified && !error ?
-          'Your have been verified' :
-          error ?
-            error :
-            'Verification in progress, please wait...'
-        }
-      </h2>
     </div>
   );
 };
