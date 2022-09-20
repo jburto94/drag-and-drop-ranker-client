@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import LoginForm from '../login-form/LoginForm';
-import ForgotPassword from './ForgotPassword';
 
 const Login = () => {
   return (
@@ -11,7 +10,7 @@ const Login = () => {
           <div className="login-form-container p-4 border rounded">
             <LoginForm />
             <div className="col mt-4">
-              <Link to="/forgot-password" element={<ForgotPassword />}>Forgot password?</Link>
+              <Link to="/forgot-password">Forgot password?</Link>
             </div>
           </div>
         </div>

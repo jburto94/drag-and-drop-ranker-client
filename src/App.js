@@ -12,6 +12,7 @@ import Login from './components/routes/Login';
 import Register from './components/routes/Register';
 import ForgotPassword from './components/routes/ForgotPassword';
 import ResetPassword from './components/routes/ResetPassword';
+import VerifyEmail from './components/routes/VerifyEmail';
 
 const App = () => {
 
@@ -24,13 +25,14 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/verify-email' element={<VerifyEmail />} />
       </Routes>
+      <Footer />
       {/* <Navbar />
       <div className='page-container container py-5'>
         <UploadListForm />
         <EditableList />
-      </div>
-      <Footer /> */}
+      </div> */}
     </div>
   );
 }
