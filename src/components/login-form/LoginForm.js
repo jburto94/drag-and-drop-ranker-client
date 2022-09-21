@@ -48,7 +48,7 @@ const LoginForm = () => {
       setIsLoggedIn(true);
       
       setSuccess(true);
-      setNotification(response.data.message)
+      setNotification(response.data.message);
       navigate('/');
     } catch (err) {
       setSuccess(false);

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
 import { NotificationContext } from '../../../context/NotificationContext';
 import './Navbar.scss';
@@ -7,6 +7,7 @@ import './Navbar.scss';
 const Navbar = () => {
   const { setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const { setSuccess, setNotification } = useContext(NotificationContext);
+  const navigate = useNavigate();
 
   const handleLogout = async e => {
     e.preventDefault();
@@ -15,6 +16,7 @@ const Navbar = () => {
     setIsLoggedIn(false);
     setSuccess(true);
     setNotification('User has been logged out.')
+    navigate('/login')
   }
 
   return (

@@ -1,14 +1,31 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { NotificationContext } from '../../context/NotificationContext';
+import { forgotPassword } from '../../services/forgotPassword';
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
+  const { setNotification, setSuccess } = useContext(NotificationContext);
 
   const handleChange = e => {
     setEmail(e.target.value);
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    try {
+      const response = await forgotPassword(email);
+      setSuccess(true);
+      setNotification(response.data.message);
+      setEmail('');
+    } catch (err) {
+      setSuccess(false);
+      setNotification(err.response.data.message);
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="form-outline mb-4">
         <label className="form-label" htmlFor="forgot-password-email">Email</label>
         <input 
