@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { ListContext } from '../../../context/ListContext';
+import { ListContext } from '../../context/ListContext';
 
-import { ReactComponent as Trash } from '../../misc/trash.svg';
+import { ReactComponent as Trash } from '../misc/trash.svg';
 import './EditableListItem.scss';
 
 const EditableListItem = ({provided, item, index}) => {

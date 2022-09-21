@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import { ListContext } from '../../context/ListContext';
 
-const UploadListForm = () => {
-  const { createList, list, setEdit } = useContext(ListContext)
+const AddListItemsForm = () => {
+  const { list, updateList, setEdit, add, setAdd } = useContext(ListContext)
   const [textInput, setTextInput] = useState('');
 
   const handleChange = e => {
@@ -11,26 +11,27 @@ const UploadListForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    createList(e.target.list_data.value);
+    updateList(list, e.target.items_data.value);
     setEdit(true);
+    setAdd(false);
     setTextInput('');
   }
 
   return (
-    <div className='UploadListForm'>
-      {!list.length &&
+    <div className='AddListItemsForm'>
+      {add &&
         <div>
-        <h2 className='text-center mb-2'>Create Your List</h2>
+        <h2 className='text-center mb-2'>Add Items to your List</h2>
         <p className='text-center mb-4'>Separate each item with a new line</p>
         <form onSubmit={handleSubmit}>
           <textarea
-            name='list_data'
+            name='items_data'
             value={textInput}
             onChange={handleChange}
             className='form-control mb-3'
             rows={12}
           />
-          <button type='submit' className='btn btn-primary'>Submit New List</button>
+          <button type='submit' className='btn btn-primary'>Add Items</button>
         </form>
       </div>
       }
@@ -38,4 +39,4 @@ const UploadListForm = () => {
   )
 };
 
-export default UploadListForm;
+export default AddListItemsForm;

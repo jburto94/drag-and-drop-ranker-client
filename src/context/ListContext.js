@@ -26,6 +26,13 @@ const createNewList = result => {
   return newList;
 }
 
+const addToList = (listItems, itemsToAdd) => {
+  const newItems = convertUserInput(itemsToAdd);
+  const oldList = listItems.map(item => item.item);
+  const newList = oldList.concat(newItems).map((item, idx) => ( { item: item, id: String(idx)} ));
+  return newList;
+}
+
 const handleRemoveItem = (listItems, itemToRemove) => {
   const updatedList = [...listItems].filter(listItem => listItem.id !== itemToRemove.id);
   return updatedList;
@@ -33,11 +40,17 @@ const handleRemoveItem = (listItems, itemToRemove) => {
 
 export const ListContext = createContext({
   list: [],
-  setList: () => {}
+  setList: () => {},
+  edit: null,
+  setEdit: () => {},
+  add: null,
+  setAdd: () => {}
 });
 
 export const ListProvider = ({ children }) => {
   const [list, setList] = useState([]);
+  const [edit, setEdit] = useState(true);
+  const [add, setAdd] = useState(false);
 
   const onDragEnd = item => {
     // Checks if user draged item to valid spot, does not update if invalid
@@ -59,13 +72,22 @@ export const ListProvider = ({ children }) => {
     setList([]);
   }
 
+  const updateList = (list, newItems) => {
+    setList(addToList(list, newItems));
+  }
+
   const value = {
     list,
     setList,
+    edit,
+    setEdit,
+    add,
+    setAdd,
     onDragEnd,
     removeItem,
     createList,
-    clearList
+    clearList,
+    updateList
   };
 
   return <ListContext.Provider value={value}>{children}</ListContext.Provider>

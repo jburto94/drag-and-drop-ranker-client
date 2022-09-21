@@ -12,8 +12,6 @@ import ResetPassword from './components/routes/ResetPassword';
 import VerifyEmail from './components/routes/VerifyEmail';
 import Notification from './components/partials/notification/Notification';
 import Footer from './components/partials/footer/Footer';
-import UploadListForm from './components/upload-list-form/UploadListForm';
-import EditableList from './components/editable-list/EditableList';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -32,7 +30,7 @@ const App = () => {
     if (token) {
       const decodedToken = jwtDecode(token);
       
-      if (!decodedToken) {
+      if (decodedToken) {
         setUser(null);
         setIsLoggedIn(false);
       } else {
@@ -72,11 +70,6 @@ const App = () => {
         <Route path='/verify-email' element={<VerifyEmail />} />
       </Routes>
       <Footer />
-      {/* <Navbar />
-      <div className='page-container container py-5'>
-        <UploadListForm />
-        <EditableList />
-      </div> */}
     </div>
   );
 }

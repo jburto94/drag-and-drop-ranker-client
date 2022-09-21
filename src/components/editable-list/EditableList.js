@@ -1,18 +1,19 @@
 import { useContext } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ListContext } from '../../context/ListContext';
-import ClearListButton from './clear-list-button/ClearListButton';
-
-import EditableListItem from './editable-list-item/EditableListItem';
+import AddListItemsButton from '../add-list-items-button/AddListItemsButton';
+import ClearListButton from '../clear-list-button/ClearListButton';
+import EditableListItem from '../editable-list-item/EditableListItem';
+import SaveListButton from '../save-list-button/SaveListButton';
 
 import './EditableList.scss';
 
 const EditableList = () => {
-  const { list, onDragEnd } = useContext(ListContext);
+  const { list, onDragEnd, edit } = useContext(ListContext);
   
   return (
     <div className='EditableList'>
-      {list.length > 0 &&
+      {(list.length > 0 && edit) &&
         <DragDropContext
             onDragEnd={onDragEnd}
           >
@@ -37,7 +38,11 @@ const EditableList = () => {
                     ))}
                   </ul>
                   {provided.placeholder}
-                  <ClearListButton />
+                  <div className='d-flex justify-content-between'>
+                    <ClearListButton />
+                    <AddListItemsButton />
+                    <SaveListButton />
+                  </div>
                 </div>
               )}
             </Droppable>
