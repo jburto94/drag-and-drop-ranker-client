@@ -32,7 +32,7 @@ const App = () => {
     if (token) {
       const decodedToken = jwtDecode(token);
       
-      if (decodedToken.exp * 1000 < Date.now()) {
+      if (!decodedToken) {
         setUser(null);
         setIsLoggedIn(false);
       } else {
