@@ -81,7 +81,7 @@ const ResetPasswordForm = () => {
           className="form-control" 
         />
       </div>
-      <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+      <button type="submit" className="btn btn-primary btn-block">Reset Password</button>
   </form>
   );
 };
