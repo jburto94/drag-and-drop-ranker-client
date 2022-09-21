@@ -1,6 +1,8 @@
+import jwtDecode from 'jwt-decode';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NotificationContext } from '../../context/NotificationContext';
+import { UserContext } from '../../context/UserContext';
 import { login } from '../../services/login';
 
 const defaultFormFields = {
@@ -14,6 +16,7 @@ const LoginForm = () => {
   const { email, password } = formFields;
   const navigate = useNavigate();
   const { setNotification, setSuccess } = useContext(NotificationContext);
+  const { setUser, setIsLoggedIn } = useContext(UserContext);
 
 
   // set dynamic handleChange for each input type
@@ -36,6 +39,14 @@ const LoginForm = () => {
         remember: String(checked)
       });
 
+      const token = response.data.token;
+      localStorage.setItem('DND_AUTH_TOKEN', JSON.stringify(token));
+      
+      const decodedToken = await jwtDecode(token);
+
+      setUser(decodedToken);
+      setIsLoggedIn(true);
+      
       setSuccess(true);
       setNotification(response.data.message)
       navigate('/');

@@ -1,10 +1,9 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { NotificationContext } from '../../context/NotificationContext';
 import { emailVerification } from '../../services/verifyEmail';
 
 const VerifyEmail = () => {
-  const [verified, setVerified] = useState(false);
   const { setNotification, setSuccess } = useContext(NotificationContext);
   const navigate = useNavigate();
 
@@ -14,7 +13,6 @@ const VerifyEmail = () => {
   useEffect(() => {
       emailVerification(token)
         .then(response => {
-          setVerified(true);
           setNotification(response.data.message);
           setSuccess(true);
           navigate('/login')
@@ -23,7 +21,7 @@ const VerifyEmail = () => {
           setNotification(err.response.data.message);
           setSuccess(false);
         })
-  }, []);
+  }, [setNotification, navigate, setSuccess, token]);
 
   return (
     <div>

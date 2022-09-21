@@ -1,7 +1,22 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
+import { NotificationContext } from '../../../context/NotificationContext';
 import './Navbar.scss';
 
 const Navbar = () => {
+  const { setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  const { setSuccess, setNotification } = useContext(NotificationContext);
+
+  const handleLogout = async e => {
+    e.preventDefault();
+    localStorage.removeItem('DND_AUTH_TOKEN');
+    setUser(null);
+    setIsLoggedIn(false);
+    setSuccess(true);
+    setNotification('User has been logged out.')
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-primary navbar-dark px-3">
       <div className="container-fluid">
@@ -11,8 +26,14 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
-            <NavLink to='/login' className="nav-link" >Login</NavLink>
-            <NavLink to='/register' className="nav-link" >Register</NavLink>
+            {isLoggedIn ?
+              <button className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</button>
+              :
+              <>
+                <NavLink to='/login' className="nav-link" >Login</NavLink>
+                <NavLink to='/register' className="nav-link" >Register</NavLink>
+              </>
+            }
           </div>
         </div>
       </div>

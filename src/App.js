@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import UploadListForm from './components/upload-list-form/UploadListForm';
-import EditableList from './components/editable-list/EditableList';
-import Footer from './components/partials/footer/Footer';
 import { NotificationContext } from './context/NotificationContext';
+import { UserContext } from './context/UserContext';
+
 import Navbar from './components/partials/navbar/Navbar';
 import Home from './components/routes/Home';
 import Login from './components/routes/Login';
@@ -12,15 +11,38 @@ import ForgotPassword from './components/routes/ForgotPassword';
 import ResetPassword from './components/routes/ResetPassword';
 import VerifyEmail from './components/routes/VerifyEmail';
 import Notification from './components/partials/notification/Notification';
+import Footer from './components/partials/footer/Footer';
+import UploadListForm from './components/upload-list-form/UploadListForm';
+import EditableList from './components/editable-list/EditableList';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import './App.scss';
+import jwtDecode from 'jwt-decode';
 
 const App = () => {
   const [showNotification, setShowNotification] = useState(false);
   const { notification, setNotification } = useContext(NotificationContext);
+  const { setUser, setIsLoggedIn } = useContext(UserContext);
 
+  // Check if a user is signed in
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('DND_AUTH_TOKEN'));
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      
+      if (decodedToken.exp * 1000 < Date.now()) {
+        setUser(null);
+        setIsLoggedIn(false);
+      } else {
+        setUser(decodedToken);
+        setIsLoggedIn(true);
+      }
+    }
+  }, [setUser, setIsLoggedIn]);
+
+  // Check for notifications
   useEffect(() => {
     if (notification) {
       setShowNotification(true);
@@ -33,7 +55,7 @@ const App = () => {
         clearTimeout(notificationTimer);
       }
     }
-  }, [setNotification, notification])
+  }, [setNotification, notification]);
 
   return (
     <div className="App">

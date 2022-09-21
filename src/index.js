@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import { ListProvider } from './context/ListContext';
 import { NotificationProvider } from './context/NotificationContext';
+import { UserProvider } from './context/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <NotificationProvider>
-      <ListProvider>
-        <App />
-      </ListProvider>
-    </NotificationProvider>
+    <UserProvider>
+      <NotificationProvider>
+        <ListProvider>
+          <App />
+        </ListProvider>
+      </NotificationProvider>
+    </UserProvider>
   </BrowserRouter>
 );
