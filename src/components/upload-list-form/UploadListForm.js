@@ -30,7 +30,7 @@ const UploadListForm = () => {
             className='form-control mb-3'
             rows={12}
           />
-          <button type='submit' className='btn btn-primary'>Submit New List</button>
+          <button type='submit' className='btn btn-primary'>Upload New List</button>
         </form>
       </div>
       }

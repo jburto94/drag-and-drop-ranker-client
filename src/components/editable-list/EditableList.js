@@ -39,9 +39,9 @@ const EditableList = () => {
                   </ul>
                   {provided.placeholder}
                   <div className='d-flex justify-content-between'>
-                    <ClearListButton />
-                    <AddListItemsButton />
                     <SaveListButton />
+                    <AddListItemsButton />
+                    <ClearListButton />
                   </div>
                 </div>
               )}

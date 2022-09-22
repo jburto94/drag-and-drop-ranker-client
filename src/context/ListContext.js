@@ -41,6 +41,10 @@ const handleRemoveItem = (listItems, itemToRemove) => {
 export const ListContext = createContext({
   list: [],
   setList: () => {},
+  listId: null,
+  setListId: () => {},
+  title: null,
+  setTitle: () => {},
   edit: null,
   setEdit: () => {},
   add: null,
@@ -49,6 +53,8 @@ export const ListContext = createContext({
 
 export const ListProvider = ({ children }) => {
   const [list, setList] = useState([]);
+  const [listId, setListId] = useState('');
+  const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(true);
   const [add, setAdd] = useState(false);
 
@@ -76,9 +82,19 @@ export const ListProvider = ({ children }) => {
     setList(addToList(list, newItems));
   }
 
+  const resetListData = () => {
+    setList([]);
+    setListId('');
+    setTitle('');
+  }
+
   const value = {
     list,
     setList,
+    listId,
+    setListId,
+    title,
+    setTitle,
     edit,
     setEdit,
     add,
@@ -87,7 +103,8 @@ export const ListProvider = ({ children }) => {
     removeItem,
     createList,
     clearList,
-    updateList
+    updateList,
+    resetListData
   };
 
   return <ListContext.Provider value={value}>{children}</ListContext.Provider>
