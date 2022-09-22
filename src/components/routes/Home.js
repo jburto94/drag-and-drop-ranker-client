@@ -1,13 +1,23 @@
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import { ListContext } from '../../context/ListContext';
 
 import UploadListForm from '../upload-list-form/UploadListForm';
 import EditableList from '../editable-list/EditableList';
 import SavedList from '../saved-list/SavedList';
 import AddListItemsForm from '../add-list-items-form/AddListItemsForm';
+import TitleListForm from '../title-list-form/TitleListForm';
 
 const Home = () => {
+  const { isLoggedIn } = useContext(UserContext);
+  const { list } = useContext(ListContext);
+
   return (
     <div className="Home">
       <div className='page-container container py-5'>
+        {list.length > 0 && isLoggedIn  &&
+          <TitleListForm />
+        }
         <UploadListForm />
         <AddListItemsForm />
         <EditableList />

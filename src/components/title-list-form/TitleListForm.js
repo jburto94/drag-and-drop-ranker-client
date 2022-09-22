@@ -1,12 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ListContext } from "../../context/ListContext";
+
+import './TitleListForm.scss';
 
 const TitleListForm = () => {
   const { title, setTitle } = useContext(ListContext);
 
   const handleChange = e => {
     setTitle(e.target.value);
-  }
+  };
 
   return (
     <div className="TitleListForm">
