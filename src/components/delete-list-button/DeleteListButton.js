@@ -10,7 +10,7 @@ import { deleteList } from '../../services/deleteList';
 
 
 const DeleteListButton = () => {
-  const { listId } = useContext(ListContext);
+  const { listId, resetListData } = useContext(ListContext);
   const { setSuccess, setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
@@ -37,6 +37,7 @@ const DeleteListButton = () => {
       const response = await deleteList(token, listId);
       setSuccess(true)
       setNotification(response.data.message);
+      resetListData();
       navigate('/lists');
     } catch (err) {
       setSuccess(false)

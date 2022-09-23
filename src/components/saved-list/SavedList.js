@@ -8,7 +8,7 @@ const SavedList = () => {
 
   return (
     <div className="SavedListed">
-      {list.length > 0 && !edit &&
+      {list && list.length > 0 && !edit &&
         <div className="saved-list-container">
         <div className='d-flex justify-content-between my-4'>
           <EditListButton />

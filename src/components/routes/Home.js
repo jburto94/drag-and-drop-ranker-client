@@ -15,12 +15,12 @@ const Home = () => {
   return (
     <div className="Home">
       <div className='page-container container py-5'>
-        {list.length > 0 && isLoggedIn &&
+        {list && list.length > 0 && isLoggedIn &&
           edit ? 
             <TitleListForm /> :
             <h2 className='mb-4'>{title}</h2>          
         }
-        {list.length < 1 &&
+        {list && list.length < 1 &&
           <UploadListForm />
         }
         <AddListItemsForm />

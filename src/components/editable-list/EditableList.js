@@ -14,7 +14,7 @@ const EditableList = () => {
   
   return (
     <div className='EditableList'>
-      {(list.length > 0 && edit) &&
+      {list && (list.length > 0 && edit) &&
         <DragDropContext
             onDragEnd={onDragEnd}
           >
