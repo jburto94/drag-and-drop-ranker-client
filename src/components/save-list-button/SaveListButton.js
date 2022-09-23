@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ListContext } from "../../context/ListContext";
+import { UserContext } from "../../context/UserContext";
 import { NotificationContext } from "../../context/NotificationContext";
 import { updateList } from '../../services/updateList';
 import { createList } from '../../services/createList';
 
 const SaveListButton = () => {
-  const { list, listId, title, setTitle, setEdit } = useContext(ListContext);
+  const { list, listId, title, setEdit } = useContext(ListContext);
+  const { isLoggedIn } = useContext(UserContext);
   const { setSuccess, setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
@@ -44,13 +46,28 @@ const SaveListButton = () => {
     setEdit(false);
   }
 
+  const handleSoftSave = () => {
+    setEdit(false);
+  }
+
   return (
-    <button
-      onClick={listId ? handleListSave : handleListCreation}
-      className='btn btn-primary SaveListButton'
-    >
-      {listId ? 'Save List' : 'Create List' }
-    </button>
+    <>
+      {isLoggedIn ?
+        <button
+          onClick={listId ? handleListSave : handleListCreation}
+          className='btn btn-primary SaveListButton'
+        >
+          {listId ? 'Save List' : 'Create List' }
+        </button>
+        :
+        <button
+          onClick={handleSoftSave}
+          className='btn btn-primary SaveListButton'
+        >
+          Save List
+        </button>
+      }
+    </>
   );
 };
 

@@ -10,13 +10,13 @@ const SavedList = () => {
     <div className="SavedListed">
       {list.length > 0 && !edit &&
         <div className="saved-list-container">
+        <div className='d-flex justify-content-between my-4'>
+          <EditListButton />
+          <DeleteListButton />
+        </div>
           {list.map((item, idx) => (
             <p key={item.id} className='mb-1'>{idx + 1}. {item.item}</p>
           ))}
-          <div className='d-flex justify-content-between mt-4'>
-            <EditListButton />
-            <DeleteListButton />
-          </div>
         </div>
       }
     </div>

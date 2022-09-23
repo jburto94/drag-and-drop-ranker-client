@@ -42,7 +42,7 @@ const Navbar = () => {
               <>
                 <NavLink to='/create-list' onClick={handleNewList} className='nav-link'>Create New List</NavLink>
                 <NavLink to='/lists' className='nav-link'>My Lists</NavLink>
-                <span className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</span>
+                <span className='nav-link border-0 bg-primary logout' onClick={handleLogout}>Logout</span>
               </>
               :
               <>

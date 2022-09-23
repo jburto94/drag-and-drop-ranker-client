@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ListContext } from '../../context/ListContext';
 
 const UploadListForm = () => {
-  const { createList, setEdit, resetListData } = useContext(ListContext)
+  const { createList, setEdit } = useContext(ListContext)
   const [textInput, setTextInput] = useState('');
 
   const handleChange = e => {

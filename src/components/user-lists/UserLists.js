@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import { UserContext } from "../../context/UserContext";
 import { UserListsContext } from "../../context/UserListsContext";
 
 import { getUserLists } from '../../services/getUserLists';
@@ -7,7 +6,6 @@ import UserListCard from "../user-list-card/UserListCard";
 
 const UserLists = () => {
   const { lists, setLists } = useContext(UserListsContext);
-  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     const token = localStorage.getItem('DND_AUTH_TOKEN')

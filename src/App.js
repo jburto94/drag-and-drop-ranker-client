@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { NotificationContext } from './context/NotificationContext';
 import { UserContext } from './context/UserContext';
+import { ListContext } from './context/ListContext';
 
 import Navbar from './components/partials/navbar/Navbar';
 import Home from './components/routes/Home';
@@ -23,6 +24,21 @@ const App = () => {
   const [showNotification, setShowNotification] = useState(false);
   const { notification, setNotification } = useContext(NotificationContext);
   const { setUser, setIsLoggedIn } = useContext(UserContext);
+  const { list, setList, title, setTitle, listId, setListId } = useContext(ListContext);
+
+  // Set list, title, and listId to what is saved on localStorage
+  // In order to persist list context through page reloads
+  useEffect(() => {
+    setList(JSON.parse(window.localStorage.getItem('list')));
+    setTitle(window.localStorage.getItem('title'));
+    setListId(window.localStorage.getItem('listId'));
+  }, [setList, setTitle, setListId])
+
+  useEffect(()  => {
+    window.localStorage.setItem('list', JSON.stringify(list));
+    window.localStorage.setItem('title', title);
+    window.localStorage.setItem('listId', listId);
+  }, [list, title, listId])
 
   // Check if a user is signed in
   useEffect(() => {

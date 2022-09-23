@@ -20,7 +20,17 @@ const EditableList = () => {
           >
             <Droppable droppableId='list'>
               {provided => (
-                <div className='py-5'>
+                <div className='pt-4 pb-5'>
+                  <div className='d-flex justify-content-between list-buttons-container mb-3'>
+                    <div className='list-buttons'>
+                      <SaveListButton />
+                      <AddListItemsButton />
+                    </div>
+                    <div className='list-buttons'>
+                      <ClearListButton />
+                      <DeleteListButton />
+                    </div>
+                  </div>
                   <ul {...provided.droppableProps} ref={provided.innerRef}>
                     {list.map((item, index) => (
                       <Draggable 
@@ -39,16 +49,6 @@ const EditableList = () => {
                     ))}
                   </ul>
                   {provided.placeholder}
-                  <div className='d-flex justify-content-between list-buttons-container'>
-                    <div className='list-buttons'>
-                      <SaveListButton />
-                      <AddListItemsButton />
-                    </div>
-                    <div className='list-buttons'>
-                      <ClearListButton />
-                      <DeleteListButton />
-                    </div>
-                  </div>
                 </div>
               )}
             </Droppable>
