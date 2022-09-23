@@ -11,6 +11,7 @@ import ForgotPassword from './components/routes/ForgotPassword';
 import ResetPassword from './components/routes/ResetPassword';
 import VerifyEmail from './components/routes/VerifyEmail';
 import Notification from './components/partials/notification/Notification';
+import Lists from './components/routes/Lists';
 import Footer from './components/partials/footer/Footer';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,12 +26,12 @@ const App = () => {
 
   // Check if a user is signed in
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('DND_AUTH_TOKEN'));
+    const token = localStorage.getItem('DND_AUTH_TOKEN');
 
     if (token) {
       const decodedToken = jwtDecode(token);
       
-      if (decodedToken) {
+      if (!decodedToken) {
         setUser(null);
         setIsLoggedIn(false);
       } else {
@@ -68,6 +69,8 @@ const App = () => {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/verify-email' element={<VerifyEmail />} />
+        <Route path='/lists' element={<Lists />} />
+        <Route path='/create-list' element={<Home />} />
       </Routes>
       <Footer />
     </div>

@@ -6,16 +6,19 @@ import App from './App';
 import { ListProvider } from './context/ListContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { UserProvider } from './context/UserContext';
+import { UserListsProvider } from './context/UserListsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <UserProvider>
-      <NotificationProvider>
+      <UserListsProvider>
         <ListProvider>
-          <App />
+          <NotificationProvider>
+            <App />
+          </NotificationProvider>
         </ListProvider>
-      </NotificationProvider>
+      </UserListsProvider>
     </UserProvider>
   </BrowserRouter>
 );

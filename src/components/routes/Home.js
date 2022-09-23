@@ -10,15 +10,19 @@ import TitleListForm from '../title-list-form/TitleListForm';
 
 const Home = () => {
   const { isLoggedIn } = useContext(UserContext);
-  const { list } = useContext(ListContext);
+  const { list, edit, title } = useContext(ListContext);
 
   return (
     <div className="Home">
       <div className='page-container container py-5'>
-        {list.length > 0 && isLoggedIn  &&
-          <TitleListForm />
+        {list.length > 0 && isLoggedIn &&
+          edit ? 
+            <TitleListForm /> :
+            <h2 className='mb-4'>{title}</h2>          
         }
-        <UploadListForm />
+        {list.length < 1 &&
+          <UploadListForm />
+        }
         <AddListItemsForm />
         <EditableList />
         <SavedList />

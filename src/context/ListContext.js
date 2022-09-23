@@ -26,10 +26,15 @@ const createNewList = result => {
   return newList;
 }
 
+const displayList = listData => {
+  const displayedList = listData.map((item, idx) => ( { item: item, id: String(idx)} ));
+  return displayedList;
+}
+
 const addToList = (listItems, itemsToAdd) => {
   const newItems = convertUserInput(itemsToAdd);
   const oldList = listItems.map(item => item.item);
-  const newList = oldList.concat(newItems).map((item, idx) => ( { item: item, id: String(idx)} ));
+  const newList = oldList.concat(newItems).map((item, idx) => ( { item, id: String(idx)} ));
   return newList;
 }
 
@@ -74,6 +79,10 @@ export const ListProvider = ({ children }) => {
     setList(createNewList(listData));
   }
 
+  const renderList = listData => {
+    setList(displayList(listData));
+  }
+
   const clearList = () => {
     setList([]);
   }
@@ -101,6 +110,7 @@ export const ListProvider = ({ children }) => {
     setAdd,
     onDragEnd,
     removeItem,
+    renderList,
     createList,
     clearList,
     updateList,

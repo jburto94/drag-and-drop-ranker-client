@@ -1,22 +1,29 @@
 import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
+import { ListContext } from '../../../context/ListContext';
 import { NotificationContext } from '../../../context/NotificationContext';
 import './Navbar.scss';
 
 const Navbar = () => {
   const { setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  const { resetListData } = useContext(ListContext);
   const { setSuccess, setNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   const handleLogout = async e => {
     e.preventDefault();
     localStorage.removeItem('DND_AUTH_TOKEN');
+    resetListData();
     setUser(null);
     setIsLoggedIn(false);
     setSuccess(true);
     setNotification('User has been logged out.')
     navigate('/login')
+  }
+
+  const handleNewList = async () => {
+    await resetListData();
   }
 
   return (
@@ -29,7 +36,11 @@ const Navbar = () => {
         <div className="collapse navbar-collapse ml-auto" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
             {isLoggedIn ?
-              <button className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</button>
+              <>
+                <NavLink to='/create-list' onClick={handleNewList} className='nav-link'>Create New List</NavLink>
+                <NavLink to='/lists' className='nav-link'>My Lists</NavLink>
+                <button className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</button>
+              </>
               :
               <>
                 <NavLink to='/login' className="nav-link" >Login</NavLink>
