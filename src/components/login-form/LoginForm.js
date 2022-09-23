@@ -39,11 +39,13 @@ const LoginForm = () => {
         remember: String(checked)
       });
 
+      console.log(response.data.token);
       const token = response.data.token;
       localStorage.setItem('DND_AUTH_TOKEN', JSON.stringify(token));
       
       const decodedToken = await jwtDecode(token);
 
+      console.log(decodedToken);
       setUser(decodedToken);
       setIsLoggedIn(true);
       

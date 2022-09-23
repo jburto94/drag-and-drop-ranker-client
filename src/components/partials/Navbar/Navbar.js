@@ -4,16 +4,19 @@ import { UserContext } from '../../../context/UserContext';
 import { ListContext } from '../../../context/ListContext';
 import { NotificationContext } from '../../../context/NotificationContext';
 import './Navbar.scss';
+import { UserListsContext } from '../../../context/UserListsContext';
 
 const Navbar = () => {
   const { setUser, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const { resetListData } = useContext(ListContext);
   const { setSuccess, setNotification } = useContext(NotificationContext);
+  const { setLists } = useContext(UserListsContext);
   const navigate = useNavigate();
 
   const handleLogout = async e => {
     e.preventDefault();
     localStorage.removeItem('DND_AUTH_TOKEN');
+    setLists([]);
     resetListData();
     setUser(null);
     setIsLoggedIn(false);
@@ -39,7 +42,7 @@ const Navbar = () => {
               <>
                 <NavLink to='/create-list' onClick={handleNewList} className='nav-link'>Create New List</NavLink>
                 <NavLink to='/lists' className='nav-link'>My Lists</NavLink>
-                <button className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</button>
+                <span className='nav-link border-0 bg-primary' onClick={handleLogout}>Logout</span>
               </>
               :
               <>

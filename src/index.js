@@ -10,15 +10,15 @@ import { UserListsProvider } from './context/UserListsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <UserProvider>
-      <UserListsProvider>
-        <ListProvider>
-          <NotificationProvider>
+  <UserProvider>
+    <UserListsProvider>
+      <ListProvider>
+        <NotificationProvider>
+          <BrowserRouter>
             <App />
-          </NotificationProvider>
-        </ListProvider>
-      </UserListsProvider>
-    </UserProvider>
-  </BrowserRouter>
+          </BrowserRouter>
+        </NotificationProvider>
+      </ListProvider>
+    </UserListsProvider>
+  </UserProvider>
 );

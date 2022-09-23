@@ -5,5 +5,36 @@
     flex-direction: column;
     padding-inline-start: 0px;
     padding-left: 0px;
+    margin-bottom: 3rem;
+  }
+
+  .list-buttons-container {
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .list-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+      }
+      
+      .btn {
+        margin-bottom: 1rem;
+        width: 100px;
+      }
+  
+      @media screen and (min-width: 500px) {
+        .SaveListButton,
+        .ClearListButton {
+          margin-right: 15px;
+        }
+      }
+    }
   }
 }

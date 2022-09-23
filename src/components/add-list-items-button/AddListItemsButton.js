@@ -11,7 +11,7 @@ const AddListItemsButton = () => {
   return (
     <button
       onClick={handleAdd}
-      className='btn btn-success'
+      className='btn btn-success AddListItemsButton'
     >
       Add Items
     </button>

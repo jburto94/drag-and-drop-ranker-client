@@ -8,7 +8,7 @@ const ClearListButton = () => {
   return (
     <button
       onClick={clearList}
-      className='btn btn-warning'
+      className='btn btn-warning ClearListButton'
     >
       Clear List
     </button>
