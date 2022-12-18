@@ -4,7 +4,7 @@ import { NotificationContext } from './context/NotificationContext';
 import { UserContext } from './context/UserContext';
 import { ListContext } from './context/ListContext';
 
-import Navbar from './components/partials/navbar/Navbar';
+import Navbar from './components/partials/Navbar/Navbar';
 import Home from './components/routes/Home';
 import Login from './components/routes/Login';
 import Register from './components/routes/Register';
@@ -13,7 +13,7 @@ import ResetPassword from './components/routes/ResetPassword';
 import VerifyEmail from './components/routes/VerifyEmail';
 import Notification from './components/partials/notification/Notification';
 import Lists from './components/routes/Lists';
-import Footer from './components/partials/footer/Footer';
+import Footer from './components/partials/Footer/Footer';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";

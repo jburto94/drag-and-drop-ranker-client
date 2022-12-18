@@ -43,6 +43,11 @@ const handleRemoveItem = (listItems, itemToRemove) => {
   return updatedList;
 }
 
+const handleEditItem = (listItems, editedItem) => {
+  const updatedList = [...listItems].map(listItem => listItem.id === editedItem.id ? editedItem : listItem);
+  return updatedList;
+}
+
 export const ListContext = createContext({
   list: [],
   setList: () => {},
@@ -73,6 +78,10 @@ export const ListProvider = ({ children }) => {
 
   const removeItem = item => {
     setList(handleRemoveItem(list, item));
+  }
+
+  const updateItem = item => {
+    setList(handleEditItem(list, item));
   }
 
   const createList = listData => {
@@ -110,6 +119,7 @@ export const ListProvider = ({ children }) => {
     setAdd,
     onDragEnd,
     removeItem,
+    updateItem,
     renderList,
     createList,
     clearList,

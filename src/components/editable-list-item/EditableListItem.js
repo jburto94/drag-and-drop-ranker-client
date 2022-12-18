@@ -1,11 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ListContext } from '../../context/ListContext';
-
+import EditListItemForm from '../edit-list-item-form/EditListItemForm';
 import { ReactComponent as Trash } from '../misc/trash.svg';
+import { ReactComponent as Edit } from '../misc/edit.svg';
 import './EditableListItem.scss';
 
 const EditableListItem = ({provided, item, index}) => {
   const { removeItem } = useContext(ListContext);
+  const [editItem, setEditItem] = useState(false);
+
+  const handleEdit = () => {
+    setEditItem(!editItem)
+  }
+
   return (
     <li 
       ref={provided.innerRef}
@@ -14,10 +21,19 @@ const EditableListItem = ({provided, item, index}) => {
       className='EditableListItem'
     >
       <span className='rank'>{index + 1}.</span>
-      <span className='item-text'>{item.item}</span>
-      <div onClick={() => removeItem(item)} className='trash-container justify-self'>
+      {editItem ? (
+        <EditListItemForm item={item} handleEdit={handleEdit} />
+      ) : (
+        <>
+          <span className='item-text'>{item.item}</span>
+          <div onClick={handleEdit} className='edit-container'>
+            <Edit />
+          </div>
+        </>
+      )}
+      <button onClick={() => removeItem(item)} className='trash-container justify-self'>
         <Trash className='trash' />
-      </div>
+      </button>
       {provided.placeholder}
     </li>
   );
