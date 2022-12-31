@@ -25,3 +25,6 @@ Despite React's normal functionality, any list and list items will not disappear
 
 #### Delete list confirmation
 In order for a user to delete a list, they must first confirm their actions through a custom alert box.
+
+#### Todo
+- Create search function on created lists 
