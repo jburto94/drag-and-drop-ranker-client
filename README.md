@@ -4,7 +4,7 @@ The frontend of this project was built using React and SASS. To view the backend
 
 ## Why I built it
 
-I have always had a fixation on quantifying things, especially through rankings. I wanted an easy-to-use app that let me upload lists, rank them, and then save the lists.
+I have always enjoyed ranking things and putting it into lists. I wanted an easy-to-use app that let me upload lists, rank them, and then save the lists.
 
 ## What it does
 
