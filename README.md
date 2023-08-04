@@ -28,3 +28,4 @@ In order for a user to delete a list, they must first confirm their actions thro
 
 ## Todo
 - Create search function on created lists 
+- Create loading screen or animation
